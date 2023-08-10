@@ -23,20 +23,22 @@ public:
             } else if(l1){
                 digit = (l1->val + carry) % 10;
                 carry = (l1->val + carry) / 10;
-            } else{
+            } else if(l2){
                 digit = (l2->val + carry) % 10;
                 carry = (l2->val + carry) / 10;
+            } else{
+                digit = carry;
+                carry = 0;
             }
-            //May have some problems handling last-digit carry;
 
             current->val = digit;
-            if(l1->next || l2->next)
+            if((l1 && l1->next) || (l2 && l2->next) || carry)
                 current->next = new ListNode();
             current = current->next;
 
             l1 = l1 ? l1->next : l1;
             l2 = l2 ? l2->next : l2;
-        } while(l1 || l2);
+        } while((l1 || l2) || carry);
 
         return result;
     }
@@ -67,17 +69,15 @@ void showList(ListNode *list){
 }
 
 int main(void){
-    cout << "DEBUG";
     Solution solution;
-    int num1[4] = {2, 4, 3, 6};
+    int num1[3] = {2, 4, 9};
     int num2[3] = {5, 6, 4};
 
-    ListNode *l1 = arrayToList(num1, 4);
+    ListNode *l1 = arrayToList(num1, 3);
     ListNode *l2 = arrayToList(num2, 3);
 
     showList(l1);
     showList(l2);
-    cout << "DEBUG";
 
     ListNode *result;
     result = solution.addTwoNumbers(l1, l2);
