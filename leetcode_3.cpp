@@ -26,9 +26,3 @@ int main(void){
 
     return 0;
 }
-
-//1. get substr.s
-//2. check if a substr is repeating
-//3. if not, check length
-//4. if length is greater than existing one, update it.
-//5. return the longest substr
